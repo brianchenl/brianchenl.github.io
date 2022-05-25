@@ -3,4 +3,5 @@ http://brianchenl.github.io/2022/05/25/brian-test/
 http://brianchenl.github.io/about/me.html
 http://brianchenl.github.io/2022/05/24/hello-world/
 http://brianchenl.github.io/
-http://brianchenl.github.io/tags/brew-node-js/
+http://brianchenl.github.io/tags/brew/
+http://brianchenl.github.io/tags/node-js/
