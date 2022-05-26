@@ -6,7 +6,7 @@
   <link href="http://brianchenl.github.io/atom.xml" rel="self"/>
   
   <link href="http://brianchenl.github.io/"/>
-  <updated>2022-05-25T15:33:56.290Z</updated>
+  <updated>2022-05-26T12:52:39.972Z</updated>
   <id>http://brianchenl.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.</title>
+    <link href="http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/"/>
+    <id>http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/</id>
+    <published>2022-05-26T12:21:50.000Z</published>
+    <updated>2022-05-26T12:52:39.972Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用<a href="https://www.cloudiac.org/" title="CloudIaC官网">CloudIaC</a>供给了一套高可用环境，SLB关联多个ECS instance。用户量下降后，根据需求减少ECS instance实例数量，执行环境更新操作时，给报错了。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ansible_host.cloudiac_website[1]: Destroying... [<span class="built_in">id</span>=10.9.0.110]</span><br><span class="line">ansible_host.cloudiac_website[1]: Destruction complete after 0s</span><br><span class="line">alicloud_instance.instance[1]: Destroying... [<span class="built_in">id</span>=i-j6cfxch3hp19qbdi10dc]</span><br><span class="line">alicloud_instance.instance[1]: Still destroying... [<span class="built_in">id</span>=i-j6cfxch3hp19qbdi10dc, 10s elapsed]</span><br><span class="line">alicloud_instance.instance[1]: Destruction complete after 12s</span><br><span class="line">alicloud_slb_server_group.default: Modifying... [<span class="built_in">id</span>=rsp-j6ctarh6aaavt]</span><br><span class="line"></span><br><span class="line">Error: [ERROR] terraform-provider-alicloud/alicloud/resource_alicloud_slb_server_group.go:209: Resource rsp-j6ctarh6aaavt RemoveVServerGroupBackendServers Failed!!! [SDK alibaba-cloud-sdk-go ERROR]:</span><br><span class="line">SDK.ServerError</span><br><span class="line">ErrorCode: ObtainIpFail</span><br><span class="line">Recommend: https://next.api.aliyun.com/troubleshoot?q=ObtainIpFail&amp;product=Slb</span><br><span class="line">RequestId: 97B9EA25-xxxx-xxxx-xxxx-0ABE26C845B4</span><br><span class="line">Message: The specified BackendServers is invalid; some of the specified backend servers <span class="keyword">do</span> not exist or are not running.</span><br><span class="line"></span><br><span class="line">  on main.tf line 70, <span class="keyword">in</span> resource <span class="string">&quot;alicloud_slb_server_group&quot;</span> <span class="string">&quot;default&quot;</span>:</span><br><span class="line">  70: resource <span class="string">&quot;alicloud_slb_server_group&quot;</span> <span class="string">&quot;default&quot;</span> &#123;</span><br></pre></td></tr></table></figure><p>第二次执行就成功。</p><h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>从日志中可以看到，先做了instance [id&#x3D;10.9.0.110] 的释放，再去更新slb_server_group资源时报了错。从控制台操作逻辑来说，应该是先将需要释放的instance从slb服务器组中删除，再进行销毁。应该是这个处理逻辑错乱出的错。给阿里云提工单！！</p><h3 id="解决结果"><a href="#解决结果" class="headerlink" title="解决结果"></a>解决结果</h3><p>2个月后的今天，阿里云终于给出了已修复的答复，试了下还是老问题，询问后得知需要增加一个资源配置，修改代码如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="string">&quot;alicloud_slb_server_group&quot;</span> <span class="string">&quot;default&quot;</span> &#123;</span><br><span class="line">  load_balancer_id = alicloud_slb_load_balancer.default.id</span><br><span class="line">  name             = <span class="string">&quot;cloudiac_server_group&quot;</span></span><br><span class="line">  <span class="comment"># 注释掉原代码</span></span><br><span class="line">  <span class="comment"># servers &#123;</span></span><br><span class="line">  <span class="comment">#   server_ids = alicloud_instance.cloudiac.*.id</span></span><br><span class="line">  <span class="comment">#   port       = &quot;80&quot;</span></span><br><span class="line">  <span class="comment">#   weight     = 50</span></span><br><span class="line">  <span class="comment"># &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource <span class="string">&quot;alicloud_slb_server_group_server_attachment&quot;</span> <span class="string">&quot;ssga&quot;</span> &#123;</span><br><span class="line">  count = var.instance_number</span><br><span class="line">  server_group_id = alicloud_slb_server_group.default.id</span><br><span class="line">  server_id = alicloud_instance.cloudiac[count.index].<span class="built_in">id</span></span><br><span class="line">  port = <span class="string">&quot;80&quot;</span></span><br><span class="line">  weight = 50</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>缩容执行结果：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ansible_host.cloudiac_website[1]: Destroying... [<span class="built_in">id</span>=10.9.0.111]</span><br><span class="line">ansible_host.cloudiac_website[1]: Destruction complete after 0s</span><br><span class="line">alicloud_slb_server_group_server_attachment.ssga[1]: Destroying... [<span class="built_in">id</span>=rsp-j6ctarh6aaavt:i-j6c5hdcgb6fim7vq3vxe:80]</span><br><span class="line">alicloud_slb_listener.default: Modifying... [<span class="built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:https:443]</span><br><span class="line">alicloud_slb_server_group_server_attachment.ssga[1]: Destruction complete after 0s</span><br><span class="line">alicloud_instance.instance[1]: Destroying... [<span class="built_in">id</span>=i-j6c5hdcgb6fim7vq3vxe]</span><br><span class="line">alicloud_slb_listener.default: Modifications complete after 1s [<span class="built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:https:443]</span><br><span class="line">alicloud_slb_listener.http: Modifying... [<span class="built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:http:80]</span><br><span class="line">alicloud_slb_listener.http: Modifications complete after 1s [<span class="built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:http:80]</span><br><span class="line">alicloud_instance.instance[1]: Still destroying... [<span class="built_in">id</span>=i-j6c5hdcgb6fim7vq3vxe, 10s elapsed]</span><br><span class="line">alicloud_instance.instance[1]: Destruction complete after 12s</span><br></pre></td></tr></table></figure><p>可以看到，在instance销毁之前，先做了 alicloud_slb_server_group_server_attachment 资源的变更，至此问题修复。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;问题现场&quot;&gt;&lt;a href=&quot;#问题现场&quot; class=&quot;headerlink&quot; title=&quot;问题现场&quot;&gt;&lt;/a&gt;问题现场&lt;/h3&gt;&lt;p&gt;使用&lt;a href=&quot;https://www.cloudiac.org/&quot; title=&quot;CloudIaC官网&quot;&gt;Cloud</summary>
+      
+    
+    
+    
+    
+    <category term="alicloud" scheme="http://brianchenl.github.io/tags/alicloud/"/>
+    
+    <category term="terraform" scheme="http://brianchenl.github.io/tags/terraform/"/>
+    
+    <category term="CloudIaC" scheme="http://brianchenl.github.io/tags/CloudIaC/"/>
+    
+    <category term="SLB" scheme="http://brianchenl.github.io/tags/SLB/"/>
+    
+  </entry>
   
   <entry>
     <title>brew安装Node.js报错处理1例</title>
@@ -37,39 +65,6 @@
     <category term="brew" scheme="http://brianchenl.github.io/tags/brew/"/>
     
     <category term="node.js" scheme="http://brianchenl.github.io/tags/node-js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>brian_test</title>
-    <link href="http://brianchenl.github.io/2022/05/25/brian-test/"/>
-    <id>http://brianchenl.github.io/2022/05/25/brian-test/</id>
-    <published>2022-05-25T13:31:33.000Z</published>
-    <updated>2022-05-25T13:31:33.126Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://brianchenl.github.io/2022/05/24/hello-world/"/>
-    <id>http://brianchenl.github.io/2022/05/24/hello-world/</id>
-    <published>2022-05-24T02:22:17.275Z</published>
-    <updated>2022-05-24T02:22:17.275Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
     
   </entry>
   
