@@ -16,26 +16,25 @@
   <meta name="author" content="Brianchenl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题现场使用CloudIaC管理官网系统，使用SLB关联多台Nginx服务做到高可用。 为了实现规范显示的URL，配置了Nginx rewrite，重启访问页面显示502。 问题排查 后台查看Nginx服务日志，没有任何请求，说明请求未触达Nginx； 到控制台检查SLB设置，发现两个监听资源的健康检查亮了红灯； 检查健康检查的详细配置，正常状态码仅设置了http_2xx，而rewrite的状态码">
+    <meta name="description" content="问题现场使用CloudIaC平台部署环境时，plan即失败 123Terraform Plan0秒stat v0.7.0.tfvars: no such file or directory  问题分析存在2点疑问  通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择； 去vcs中检查云模板也有这个问题存在。  问题定位在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SLB监听开启健康检查导致页面502问题">
-<meta property="og:url" content="http://brianchenl.github.io/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="terrafrom plan: stat v0.7.0.tfvars: no such file or directory">
+<meta property="og:url" content="http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/index.html">
 <meta property="og:site_name" content="天天老豆">
-<meta property="og:description" content="问题现场使用CloudIaC管理官网系统，使用SLB关联多台Nginx服务做到高可用。 为了实现规范显示的URL，配置了Nginx rewrite，重启访问页面显示502。 问题排查 后台查看Nginx服务日志，没有任何请求，说明请求未触达Nginx； 到控制台检查SLB设置，发现两个监听资源的健康检查亮了红灯； 检查健康检查的详细配置，正常状态码仅设置了http_2xx，而rewrite的状态码">
+<meta property="og:description" content="问题现场使用CloudIaC平台部署环境时，plan即失败 123Terraform Plan0秒stat v0.7.0.tfvars: no such file or directory  问题分析存在2点疑问  通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择； 去vcs中检查云模板也有这个问题存在。  问题定位在">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-27T03:01:07.000Z">
-<meta property="article:modified_time" content="2022-06-02T14:15:47.829Z">
+<meta property="article:published_time" content="2022-06-02T14:03:00.000Z">
+<meta property="article:modified_time" content="2022-06-02T14:14:14.177Z">
 <meta property="article:author" content="Brianchenl">
-<meta property="article:tag" content="SLB">
-<meta property="article:tag" content="健康检查">
-<meta property="article:tag" content="rewrite">
+<meta property="article:tag" content="terraform">
+<meta property="article:tag" content="CloudIaC">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>SLB监听开启健康检查导致页面502问题 - 天天老豆</title>
+  <title>terrafrom plan: stat v0.7.0.tfvars: no such file or directory - 天天老豆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SLB监听开启健康检查导致页面502问题"></span>
+            <span id="subtitle" data-typed-text="terrafrom plan: stat v0.7.0.tfvars: no such file or directory"></span>
           
         </div>
 
@@ -198,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-27 11:01" pubdate>
-          2022年5月27日 上午
+        <time datetime="2022-06-02 22:03" pubdate>
+          2022年6月2日 晚上
         </time>
       </span>
     
@@ -210,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          374 字
+          272 字
         
       </span>
     
@@ -221,7 +220,7 @@
         
         
         
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -259,21 +258,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SLB监听开启健康检查导致页面502问题</h1>
+            <h1 style="display: none">terrafrom plan: stat v0.7.0.tfvars: no such file or directory</h1>
             
             <div class="markdown-body">
               
-              <h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用CloudIaC管理官网系统，使用SLB关联多台Nginx服务做到高可用。</p>
-<p>为了实现规范显示的URL，配置了Nginx rewrite，重启访问页面显示502。</p>
-<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><ol>
-<li>后台查看Nginx服务日志，没有任何请求，说明请求未触达Nginx；</li>
-<li>到控制台检查SLB设置，发现两个监听资源的健康检查亮了红灯；</li>
-<li>检查健康检查的详细配置，正常状态码仅设置了<strong>http_2xx</strong>，而rewrite的状态码默认是301，问题应该在这里。</li>
-</ol>
-<h3 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h3><p>修改terraform脚本中对应的参数</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">resource</span> <span class="hljs-string">&quot;alicloud_slb_listener&quot;</span> <span class="hljs-string">&quot;default&quot;</span> &#123;<br>  <span class="hljs-string">……</span><br>  <span class="hljs-string">health_check_http_code</span>     <span class="hljs-string">=</span> <span class="hljs-string">&quot;http_2xx,http_3xx&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+              <h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用CloudIaC平台部署环境时，plan即失败</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Terraform Plan<br>0秒<br><span class="hljs-built_in">stat</span> v0.7.0.tfvars: no such file or directory<br></code></pre></td></tr></table></figure>
 
-<p>重新部署环境后访问正常。</p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>存在2点疑问</p>
+<ol>
+<li>通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择；</li>
+<li>去vcs中检查云模板也有这个问题存在。</li>
+</ol>
+<h3 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h3><p>在vcs中检查时发现这个文件排序的位置很奇怪，没有和其他版本的tfvars在一起，而是独自排在最前面，检查文件名发现文件名前面有一个空格。<br>文件名中去除空格后，再次部署恢复正常。</p>
 
               
             </div>
@@ -306,11 +303,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/SLB/">#SLB</a>
+        <a href="/tags/terraform/">#terraform</a>
       
-        <a href="/tags/%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">#健康检查</a>
-      
-        <a href="/tags/rewrite/">#rewrite</a>
+        <a href="/tags/CloudIaC/">#CloudIaC</a>
       
     </div>
   
@@ -322,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SLB监听开启健康检查导致页面502问题</div>
-      <div>http://brianchenl.github.io/2022/05/27/SLB监听开启健康检查导致页面502问题/</div>
+      <div>terrafrom plan: stat v0.7.0.tfvars: no such file or directory</div>
+      <div>http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年5月27日</div>
+          <div>2022年6月2日</div>
         </div>
       
       
@@ -365,18 +360,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/" title="terrafrom plan: stat v0.7.0.tfvars: no such file or directory">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">terrafrom plan: stat v0.7.0.tfvars: no such file or directory</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/" title="包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.">
-                        <span class="hidden-mobile">包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.</span>
+                      <a href="/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/" title="SLB监听开启健康检查导致页面502问题">
+                        <span class="hidden-mobile">SLB监听开启健康检查导致页面502问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

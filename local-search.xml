@@ -1,129 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>天天老豆</title>
+<search>
   
-  <subtitle>胆欲大而心欲小，智欲圆而行欲方</subtitle>
-  <link href="http://brianchenl.github.io/atom.xml" rel="self"/>
   
-  <link href="http://brianchenl.github.io/"/>
-  <updated>2022-06-02T14:14:14.177Z</updated>
-  <id>http://brianchenl.github.io/</id>
-  
-  <author>
-    <name>Brianchenl</name>
-    
-  </author>
-  
-  <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
     <title>terrafrom plan: stat v0.7.0.tfvars: no such file or directory</title>
-    <link href="http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/"/>
-    <id>http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/</id>
-    <published>2022-06-02T14:03:00.000Z</published>
-    <updated>2022-06-02T14:14:14.177Z</updated>
+    <link href="/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/"/>
+    <url>/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/</url>
     
     <content type="html"><![CDATA[<h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用CloudIaC平台部署环境时，plan即失败</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Terraform Plan<br>0秒<br><span class="hljs-built_in">stat</span> v0.7.0.tfvars: no such file or directory<br></code></pre></td></tr></table></figure><h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>存在2点疑问</p><ol><li>通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择；</li><li>去vcs中检查云模板也有这个问题存在。</li></ol><h3 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h3><p>在vcs中检查时发现这个文件排序的位置很奇怪，没有和其他版本的tfvars在一起，而是独自排在最前面，检查文件名发现文件名前面有一个空格。<br>文件名中去除空格后，再次部署恢复正常。</p>]]></content>
     
     
+    <categories>
       
+      <category>聚沙成塔</category>
       
-    <summary type="html">&lt;h3 id=&quot;问题现场&quot;&gt;&lt;a href=&quot;#问题现场&quot; class=&quot;headerlink&quot; title=&quot;问题现场&quot;&gt;&lt;/a&gt;问题现场&lt;/h3&gt;&lt;p&gt;使用CloudIaC平台部署环境时，plan即失败&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;</summary>
+    </categories>
+    
+    
+    <tags>
       
-    
-    
-    
-    <category term="聚沙成塔" scheme="http://brianchenl.github.io/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/"/>
-    
-    
-    <category term="terraform" scheme="http://brianchenl.github.io/tags/terraform/"/>
-    
-    <category term="CloudIaC" scheme="http://brianchenl.github.io/tags/CloudIaC/"/>
+      <tag>terraform</tag>
+      
+      <tag>CloudIaC</tag>
+      
+    </tags>
     
   </entry>
   
+  
+  
   <entry>
     <title>SLB监听开启健康检查导致页面502问题</title>
-    <link href="http://brianchenl.github.io/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/"/>
-    <id>http://brianchenl.github.io/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/</id>
-    <published>2022-05-27T03:01:07.000Z</published>
-    <updated>2022-06-02T14:15:47.829Z</updated>
+    <link href="/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/"/>
+    <url>/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/</url>
     
     <content type="html"><![CDATA[<h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用CloudIaC管理官网系统，使用SLB关联多台Nginx服务做到高可用。</p><p>为了实现规范显示的URL，配置了Nginx rewrite，重启访问页面显示502。</p><h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><ol><li>后台查看Nginx服务日志，没有任何请求，说明请求未触达Nginx；</li><li>到控制台检查SLB设置，发现两个监听资源的健康检查亮了红灯；</li><li>检查健康检查的详细配置，正常状态码仅设置了<strong>http_2xx</strong>，而rewrite的状态码默认是301，问题应该在这里。</li></ol><h3 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h3><p>修改terraform脚本中对应的参数</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">resource</span> <span class="hljs-string">&quot;alicloud_slb_listener&quot;</span> <span class="hljs-string">&quot;default&quot;</span> &#123;<br>  <span class="hljs-string">……</span><br>  <span class="hljs-string">health_check_http_code</span>     <span class="hljs-string">=</span> <span class="hljs-string">&quot;http_2xx,http_3xx&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure><p>重新部署环境后访问正常。</p>]]></content>
     
     
+    <categories>
       
+      <category>聚沙成塔</category>
       
-    <summary type="html">&lt;h3 id=&quot;问题现场&quot;&gt;&lt;a href=&quot;#问题现场&quot; class=&quot;headerlink&quot; title=&quot;问题现场&quot;&gt;&lt;/a&gt;问题现场&lt;/h3&gt;&lt;p&gt;使用CloudIaC管理官网系统，使用SLB关联多台Nginx服务做到高可用。&lt;/p&gt;
-&lt;p&gt;为了实现规范显示的URL，配置</summary>
+    </categories>
+    
+    
+    <tags>
       
-    
-    
-    
-    <category term="聚沙成塔" scheme="http://brianchenl.github.io/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/"/>
-    
-    
-    <category term="SLB" scheme="http://brianchenl.github.io/tags/SLB/"/>
-    
-    <category term="健康检查" scheme="http://brianchenl.github.io/tags/%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/"/>
-    
-    <category term="rewrite" scheme="http://brianchenl.github.io/tags/rewrite/"/>
+      <tag>SLB</tag>
+      
+      <tag>健康检查</tag>
+      
+      <tag>rewrite</tag>
+      
+    </tags>
     
   </entry>
   
+  
+  
   <entry>
     <title>包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.</title>
-    <link href="http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/"/>
-    <id>http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/</id>
-    <published>2022-05-26T12:21:50.000Z</published>
-    <updated>2022-06-02T14:04:41.060Z</updated>
+    <link href="/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/"/>
+    <url>/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/</url>
     
     <content type="html"><![CDATA[<h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用<a href="https://www.cloudiac.org/" title="CloudIaC官网">CloudIaC</a>供给了一套高可用环境，SLB关联多个ECS instance。用户量下降后，根据需求减少ECS instance实例数量，执行环境更新操作时，给报错了。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">ansible_host.cloudiac_website[1]: Destroying... [<span class="hljs-built_in">id</span>=10.9.0.110]<br>ansible_host.cloudiac_website[1]: Destruction complete after 0s<br>alicloud_instance.instance[1]: Destroying... [<span class="hljs-built_in">id</span>=i-j6cfxch3hp19qbdi10dc]<br>alicloud_instance.instance[1]: Still destroying... [<span class="hljs-built_in">id</span>=i-j6cfxch3hp19qbdi10dc, 10s elapsed]<br>alicloud_instance.instance[1]: Destruction complete after 12s<br>alicloud_slb_server_group.default: Modifying... [<span class="hljs-built_in">id</span>=rsp-j6ctarh6aaavt]<br><br>Error: [ERROR] terraform-provider-alicloud/alicloud/resource_alicloud_slb_server_group.go:209: Resource rsp-j6ctarh6aaavt RemoveVServerGroupBackendServers Failed!!! [SDK alibaba-cloud-sdk-go ERROR]:<br>SDK.ServerError<br>ErrorCode: ObtainIpFail<br>Recommend: https://next.api.aliyun.com/troubleshoot?q=ObtainIpFail&amp;product=Slb<br>RequestId: 97B9EA25-xxxx-xxxx-xxxx-0ABE26C845B4<br>Message: The specified BackendServers is invalid; some of the specified backend servers <span class="hljs-keyword">do</span> not exist or are not running.<br><br>  on main.tf line 70, <span class="hljs-keyword">in</span> resource <span class="hljs-string">&quot;alicloud_slb_server_group&quot;</span> <span class="hljs-string">&quot;default&quot;</span>:<br>  70: resource <span class="hljs-string">&quot;alicloud_slb_server_group&quot;</span> <span class="hljs-string">&quot;default&quot;</span> &#123;<br></code></pre></td></tr></table></figure><p>第二次执行就成功。</p><h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>从日志中可以看到，先做了instance [id&#x3D;10.9.0.110] 的释放，再去更新slb_server_group资源时报了错。从控制台操作逻辑来说，应该是先将需要释放的instance从slb服务器组中删除，再进行销毁。应该是这个处理逻辑错乱出的错。给阿里云提工单！！</p><h3 id="解决结果"><a href="#解决结果" class="headerlink" title="解决结果"></a>解决结果</h3><p>2个月后的今天，阿里云终于给出了已修复的答复，试了下还是老问题，询问后得知需要增加一个资源配置，修改代码如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">resource <span class="hljs-string">&quot;alicloud_slb_server_group&quot;</span> <span class="hljs-string">&quot;default&quot;</span> &#123;<br>  load_balancer_id = alicloud_slb_load_balancer.default.id<br>  name             = <span class="hljs-string">&quot;cloudiac_server_group&quot;</span><br>  <span class="hljs-comment"># 注释掉原代码</span><br>  <span class="hljs-comment"># servers &#123;</span><br>  <span class="hljs-comment">#   server_ids = alicloud_instance.cloudiac.*.id</span><br>  <span class="hljs-comment">#   port       = &quot;80&quot;</span><br>  <span class="hljs-comment">#   weight     = 50</span><br>  <span class="hljs-comment"># &#125;</span><br>&#125;<br><br>resource <span class="hljs-string">&quot;alicloud_slb_server_group_server_attachment&quot;</span> <span class="hljs-string">&quot;ssga&quot;</span> &#123;<br>  count = var.instance_number<br>  server_group_id = alicloud_slb_server_group.default.id<br>  server_id = alicloud_instance.cloudiac[count.index].<span class="hljs-built_in">id</span><br>  port = <span class="hljs-string">&quot;80&quot;</span><br>  weight = 50<br>&#125;<br></code></pre></td></tr></table></figure><p>缩容执行结果：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">ansible_host.cloudiac_website[1]: Destroying... [<span class="hljs-built_in">id</span>=10.9.0.111]<br>ansible_host.cloudiac_website[1]: Destruction complete after 0s<br>alicloud_slb_server_group_server_attachment.ssga[1]: Destroying... [<span class="hljs-built_in">id</span>=rsp-j6ctarh6aaavt:i-j6c5hdcgb6fim7vq3vxe:80]<br>alicloud_slb_listener.default: Modifying... [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:https:443]<br>alicloud_slb_server_group_server_attachment.ssga[1]: Destruction complete after 0s<br>alicloud_instance.instance[1]: Destroying... [<span class="hljs-built_in">id</span>=i-j6c5hdcgb6fim7vq3vxe]<br>alicloud_slb_listener.default: Modifications complete after 1s [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:https:443]<br>alicloud_slb_listener.http: Modifying... [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:http:80]<br>alicloud_slb_listener.http: Modifications complete after 1s [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:http:80]<br>alicloud_instance.instance[1]: Still destroying... [<span class="hljs-built_in">id</span>=i-j6c5hdcgb6fim7vq3vxe, 10s elapsed]<br>alicloud_instance.instance[1]: Destruction complete after 12s<br></code></pre></td></tr></table></figure><p>可以看到，在instance销毁之前，先做了 alicloud_slb_server_group_server_attachment 资源的变更，至此问题修复。</p>]]></content>
     
     
+    <categories>
       
+      <category>聚沙成塔</category>
       
-    <summary type="html">&lt;h3 id=&quot;问题现场&quot;&gt;&lt;a href=&quot;#问题现场&quot; class=&quot;headerlink&quot; title=&quot;问题现场&quot;&gt;&lt;/a&gt;问题现场&lt;/h3&gt;&lt;p&gt;使用&lt;a href=&quot;https://www.cloudiac.org/&quot; title=&quot;CloudIaC官网&quot;&gt;Cloud</summary>
+    </categories>
+    
+    
+    <tags>
       
-    
-    
-    
-    <category term="聚沙成塔" scheme="http://brianchenl.github.io/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/"/>
-    
-    
-    <category term="aliyun" scheme="http://brianchenl.github.io/tags/aliyun/"/>
-    
-    <category term="terraform" scheme="http://brianchenl.github.io/tags/terraform/"/>
-    
-    <category term="CloudIaC" scheme="http://brianchenl.github.io/tags/CloudIaC/"/>
+      <tag>aliyun</tag>
+      
+      <tag>terraform</tag>
+      
+      <tag>CloudIaC</tag>
+      
+    </tags>
     
   </entry>
   
+  
+  
   <entry>
     <title>brew安装Node.js报错处理1例</title>
-    <link href="http://brianchenl.github.io/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/"/>
-    <id>http://brianchenl.github.io/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/</id>
-    <published>2022-05-25T14:33:55.000Z</published>
-    <updated>2022-05-27T14:46:35.429Z</updated>
+    <link href="/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/"/>
+    <url>/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/</url>
     
     <content type="html"><![CDATA[<h3 id="出错现场"><a href="#出错现场" class="headerlink" title="出错现场"></a>出错现场</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">Warning: Bottle missing, falling back to the default domain...<br>==&gt; Downloading https://ghcr.io/v2/homebrew/core/node/manifests/17.6.0<br>Already downloaded: /Users/brian/Library/Caches/Homebrew/downloads/617e1fb7782c60f2570a27b882d8e7c819d3ebc0204bc67963c779e1515d8c16--node-17.6.0.bottle_manifest.json<br>==&gt; Downloading https://ghcr.io/v2/homebrew/core/node/blobs/sha256:01f84ba9e17af0eee4de4950edf3ac8be2a4ff1f13a627216fbd05c7632443cc<br>Already downloaded: /Users/brian/Library/Caches/Homebrew/downloads/f79056fa91d100f94bf22d89b097783b414372e31f7658eae4628a33dc70ecc2--node--17.6.0.arm64_monterey.bottle.tar.gz<br>==&gt; Installing dependencies for node: brotli, c-ares, icu4c, libnghttp2 and libuv<br>==&gt; Installing node dependency: brotli<br>fatal: not in a git directory<br>Error: Command failed with exit 128: git<br></code></pre></td></tr></table></figure><h3 id="执行检查代码"><a href="#执行检查代码" class="headerlink" title="执行检查代码"></a>执行检查代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">brew doctor <span class="hljs-comment"># 检查brew能否正常工作</span><br></code></pre></td></tr></table></figure><p>显示结果</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash">Please note that these warnings are just used to <span class="hljs-built_in">help</span> the Homebrew maintainers<br>with debugging <span class="hljs-keyword">if</span> you file an issue. If everything you use Homebrew <span class="hljs-keyword">for</span> is<br>working fine: please don<span class="hljs-string">&#x27;t worry or file an issue; just ignore this. Thanks!</span><br><span class="hljs-string"></span><br><span class="hljs-string">Warning: Suspicious https://github.com/Homebrew/brew git origin remote found.</span><br><span class="hljs-string">The current git origin is:</span><br><span class="hljs-string">  https://mirrors.ustc.edu.cn/brew.git</span><br><span class="hljs-string"></span><br><span class="hljs-string">With a non-standard origin, Homebrew won&#x27;</span>t update properly.<br>You can solve this by setting the origin remote:<br>  git -C <span class="hljs-string">&quot;/opt/homebrew&quot;</span> remote set-url origin https://github.com/Homebrew/brew<br><br>Warning: Homebrew/homebrew-cask was not tapped properly! Run:<br>  <span class="hljs-built_in">rm</span> -rf <span class="hljs-string">&quot;/opt/homebrew/Library/Taps/homebrew/homebrew-cask&quot;</span><br>  brew tap homebrew/cask<br><br>Warning: Homebrew/homebrew-core was not tapped properly! Run:<br>  <span class="hljs-built_in">rm</span> -rf <span class="hljs-string">&quot;/opt/homebrew/Library/Taps/homebrew/homebrew-core&quot;</span><br>  brew tap homebrew/core<br><br>Warning: <span class="hljs-string">&quot;config&quot;</span> scripts exist outside your system or Homebrew directories.<br>`./configure` scripts often look <span class="hljs-keyword">for</span> *-config scripts to determine <span class="hljs-keyword">if</span><br>software packages are installed, and <span class="hljs-built_in">which</span> additional flags to use when<br>compiling and linking.<br><br>Having additional scripts <span class="hljs-keyword">in</span> your path can confuse software installed via<br>Homebrew <span class="hljs-keyword">if</span> the config script overrides a system or Homebrew-provided<br>script of the same name. We found the following <span class="hljs-string">&quot;config&quot;</span> scripts:<br>  /Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9-config<br>  /Library/Frameworks/Python.framework/Versions/3.9/bin/python3-config<br></code></pre></td></tr></table></figure><h3 id="处理异常"><a href="#处理异常" class="headerlink" title="处理异常"></a>处理异常</h3><p>根据提示逐一执行命令即可</p>]]></content>
     
     
+    <categories>
       
+      <category>聚沙成塔</category>
       
-    <summary type="html">&lt;h3 id=&quot;出错现场&quot;&gt;&lt;a href=&quot;#出错现场&quot; class=&quot;headerlink&quot; title=&quot;出错现场&quot;&gt;&lt;/a&gt;出错现场&lt;/h3&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr</summary>
+    </categories>
+    
+    
+    <tags>
       
-    
-    
-    
-    <category term="聚沙成塔" scheme="http://brianchenl.github.io/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/"/>
-    
-    
-    <category term="brew" scheme="http://brianchenl.github.io/tags/brew/"/>
-    
-    <category term="node.js" scheme="http://brianchenl.github.io/tags/node-js/"/>
+      <tag>brew</tag>
+      
+      <tag>node.js</tag>
+      
+    </tags>
     
   </entry>
   
-</feed>
+  
+  
+  
+</search>
