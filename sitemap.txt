@@ -1,3 +1,4 @@
+http://brianchenl.github.io/2022/06/07/github-ssh/
 http://brianchenl.github.io/2022/06/07/slb-update-certificate-failed/
 http://brianchenl.github.io/2022/05/27/slb_listener_error/
 http://brianchenl.github.io/2022/06/02/terrafrom_plan_no_such_file_error/
@@ -19,4 +20,7 @@ http://brianchenl.github.io/tags/CloudIaC/
 http://brianchenl.github.io/tags/SLB/
 http://brianchenl.github.io/tags/%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/
 http://brianchenl.github.io/tags/rewrite/
+http://brianchenl.github.io/tags/GitHub/
+http://brianchenl.github.io/tags/ssh/
 http://brianchenl.github.io/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/
+http://brianchenl.github.io/categories/%E7%8F%AD%E9%97%A8%E5%BC%84%E6%96%A7/

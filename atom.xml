@@ -6,7 +6,7 @@
   <link href="http://brianchenl.github.io/atom.xml" rel="self"/>
   
   <link href="http://brianchenl.github.io/"/>
-  <updated>2022-06-07T07:54:45.080Z</updated>
+  <updated>2022-06-07T08:27:21.210Z</updated>
   <id>http://brianchenl.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GitHub的ssh配置</title>
+    <link href="http://brianchenl.github.io/2022/06/07/github-ssh/"/>
+    <id>http://brianchenl.github.io/2022/06/07/github-ssh/</id>
+    <published>2022-06-07T07:58:35.000Z</published>
+    <updated>2022-06-07T08:27:21.210Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p> GitHub 为了安全性考虑，在2020年7月就准备对所有需要使用身份认证的git命令切换成<strong>基于令牌</strong>的身份认证。并且从2021年8月13日开始，在 GitHub.com上对Git操作进行身份验证时将不再接受帐户密码。</p></blockquote><h3 id="Git用户信息配置"><a href="#Git用户信息配置" class="headerlink" title="Git用户信息配置"></a>Git用户信息配置</h3><p>执行以下指令，分别配置user.name和user.email</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;你的github用户名&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;你的github账户邮箱&quot;</span><br></code></pre></td></tr></table></figure><h3 id="创建ssh-key"><a href="#创建ssh-key" class="headerlink" title="创建ssh key"></a>创建ssh key</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;你的github账户邮箱&quot;</span><br></code></pre></td></tr></table></figure><p>代码参数含义：</p><p>-t 指定密钥类型，默认是 rsa ，可以省略。<br>-C 设置注释文字，比如邮箱。<br>-f 指定密钥文件存储文件名。</p><p>以上代码省略了 -f 参数，因此，运行上面那条命令后会让你输入一个文件名，用于保存刚才生成的 SSH key 代码，如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Generating public/private rsa key pair.<br><span class="hljs-comment"># Enter file in which to save the key (/c/Users/you/.ssh/id_rsa): [Press enter]</span><br></code></pre></td></tr></table></figure><p>不输入文件名，会在~&#x2F;.ssh目录下生成默认的 id_rsa 和 id_rsa.pub 两个秘钥文件。</p><h3 id="GitHub设置"><a href="#GitHub设置" class="headerlink" title="GitHub设置"></a>GitHub设置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub<br></code></pre></td></tr></table></figure><p>复制公钥内容到剪切板，登录GitHub帐号，点击右上角头像——Settings——<a href="https://github.com/settings/keys"> SSH and GPG keys </a>——[New SSH key]</p><p><img src="http://pic.tiantianlaodou.cn/typora-image-20220607162425321.png" alt="添加SSH key界面"></p><p>起个名字，粘贴刚才复制的公钥保存。这样就设置好了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt; GitHub 为了安全性考虑，在2020年7月就准备对所有需要使用身份认证的git命令切换成&lt;strong&gt;基于令牌&lt;/strong&gt;的身份认证。并且从2021年8月13日开始，在 GitHub.com上对Git操作进行身份验证时将不再接受帐户密</summary>
+      
+    
+    
+    
+    <category term="班门弄斧" scheme="http://brianchenl.github.io/categories/%E7%8F%AD%E9%97%A8%E5%BC%84%E6%96%A7/"/>
+    
+    
+    <category term="GitHub" scheme="http://brianchenl.github.io/tags/GitHub/"/>
+    
+    <category term="ssh" scheme="http://brianchenl.github.io/tags/ssh/"/>
+    
+  </entry>
   
   <entry>
     <title>绑定证书的SLB更新证书失败</title>
