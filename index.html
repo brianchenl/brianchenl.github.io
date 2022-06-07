@@ -212,13 +212,76 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/" target="_self">
+        <a href="/2022/06/07/slb-update-certificate-failed/" target="_self">
+          绑定证书的SLB更新证书失败
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/07/slb-update-certificate-failed/" target="_self">
+        <div>
+          问题现场SLB绑定了证书，https的listener关联到SLB。 因证书更新，修改了tf脚本中证书名和路径，重新部署环境时提示错误。 123456Error: [ERROR] terraform-provider-alicloud&#x2F;alicloud&#x2F;resource_alicloud_slb_server_certificate.go:231: Resource 157913262532347
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-07 14:10" pubdate>
+              2022-06-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/" class="category-chain-item">聚沙成塔</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/aliyun/">#aliyun</a>
+            
+              <a href="/tags/terraform/">#terraform</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/02/terrafrom_plan_no_such_file_error/" target="_self">
           terrafrom plan: stat v0.7.0.tfvars: no such file or directory
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/02/terrafrom_plan_no_such_file_error/" target="_self">
         <div>
           问题现场使用CloudIaC平台部署环境时，plan即失败 123Terraform Plan0秒stat v0.7.0.tfvars: no such file or directory  问题分析存在2点疑问  通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择； 去vcs中检查云模板也有这个问题存在。  问题定位在
         </div>
@@ -275,13 +338,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/" target="_self">
+        <a href="/2022/05/27/slb_listener_error/" target="_self">
           SLB监听开启健康检查导致页面502问题
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/27/slb_listener_error/" target="_self">
         <div>
           问题现场使用CloudIaC管理官网系统，使用SLB关联多台Nginx服务做到高可用。 为了实现规范显示的URL，配置了Nginx rewrite，重启访问页面显示502。 问题排查 后台查看Nginx服务日志，没有任何请求，说明请求未触达Nginx； 到控制台检查SLB设置，发现两个监听资源的健康检查亮了红灯； 检查健康检查的详细配置，正常状态码仅设置了http_2xx，而rewrite的状态码
         </div>
@@ -340,13 +403,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/" target="_self">
+        <a href="/2022/05/26/slb_shrink_error/" target="_self">
           包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/26/slb_shrink_error/" target="_self">
         <div>
           问题现场使用CloudIaC供给了一套高可用环境，SLB关联多个ECS instance。用户量下降后，根据需求减少ECS instance实例数量，执行环境更新操作时，给报错了。 12345678910111213141516ansible_host.cloudiac_website[1]: Destroying... [id&#x3D;10.9.0.110]ansible_host.cloudiac_w
         </div>
@@ -405,13 +468,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/" target="_self">
+        <a href="/2022/05/25/brew_node_js_error/" target="_self">
           brew安装Node.js报错处理1例
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/25/brew_node_js_error/" target="_self">
         <div>
           出错现场123456789Warning: Bottle missing, falling back to the default domain...&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;ghcr.io&#x2F;v2&#x2F;homebrew&#x2F;core&#x2F;node&#x2F;manifests&#x2F;17.6.0Already downloaded: &#x2F;Users&#x2F;brian&#x2F;Library&#x2F;Caches&#x2F;Home
         </div>

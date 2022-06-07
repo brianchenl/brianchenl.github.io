@@ -16,17 +16,16 @@
   <meta name="author" content="Brianchenl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题现场使用CloudIaC供给了一套高可用环境，SLB关联多个ECS instance。用户量下降后，根据需求减少ECS instance实例数量，执行环境更新操作时，给报错了。 12345678910111213141516ansible_host.cloudiac_website[1]: Destroying... [id&#x3D;10.9.0.110]ansible_host.cloudiac_w">
+    <meta name="description" content="问题现场使用CloudIaC平台部署环境时，plan即失败 123Terraform Plan0秒stat v0.7.0.tfvars: no such file or directory  问题分析存在2点疑问  通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择； 去vcs中检查云模板也有这个问题存在。  问题定位在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.">
-<meta property="og:url" content="http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/index.html">
+<meta property="og:title" content="terrafrom plan: stat v0.7.0.tfvars: no such file or directory">
+<meta property="og:url" content="http://brianchenl.github.io/2022/06/02/terrafrom_plan_no_such_file_error/index.html">
 <meta property="og:site_name" content="天天老豆">
-<meta property="og:description" content="问题现场使用CloudIaC供给了一套高可用环境，SLB关联多个ECS instance。用户量下降后，根据需求减少ECS instance实例数量，执行环境更新操作时，给报错了。 12345678910111213141516ansible_host.cloudiac_website[1]: Destroying... [id&#x3D;10.9.0.110]ansible_host.cloudiac_w">
+<meta property="og:description" content="问题现场使用CloudIaC平台部署环境时，plan即失败 123Terraform Plan0秒stat v0.7.0.tfvars: no such file or directory  问题分析存在2点疑问  通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择； 去vcs中检查云模板也有这个问题存在。  问题定位在">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-26T12:21:50.000Z">
-<meta property="article:modified_time" content="2022-06-02T14:04:41.060Z">
+<meta property="article:published_time" content="2022-06-02T14:03:00.000Z">
+<meta property="article:modified_time" content="2022-06-02T14:14:14.177Z">
 <meta property="article:author" content="Brianchenl">
-<meta property="article:tag" content="aliyun">
 <meta property="article:tag" content="terraform">
 <meta property="article:tag" content="CloudIaC">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +34,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running. - 天天老豆</title>
+  <title>terrafrom plan: stat v0.7.0.tfvars: no such file or directory - 天天老豆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running."></span>
+            <span id="subtitle" data-typed-text="terrafrom plan: stat v0.7.0.tfvars: no such file or directory"></span>
           
         </div>
 
@@ -198,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-26 20:21" pubdate>
-          2022年5月26日 晚上
+        <time datetime="2022-06-02 22:03" pubdate>
+          2022年6月2日 晚上
         </time>
       </span>
     
@@ -210,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          272 字
         
       </span>
     
@@ -221,7 +220,7 @@
         
         
         
-          24 分钟
+          3 分钟
         
       </span>
     
@@ -259,22 +258,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.</h1>
+            <h1 style="display: none">terrafrom plan: stat v0.7.0.tfvars: no such file or directory</h1>
             
             <div class="markdown-body">
               
-              <h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用<a target="_blank" rel="noopener" href="https://www.cloudiac.org/" title="CloudIaC官网">CloudIaC</a>供给了一套高可用环境，SLB关联多个ECS instance。用户量下降后，根据需求减少ECS instance实例数量，执行环境更新操作时，给报错了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">ansible_host.cloudiac_website[1]: Destroying... [<span class="hljs-built_in">id</span>=10.9.0.110]<br>ansible_host.cloudiac_website[1]: Destruction complete after 0s<br>alicloud_instance.instance[1]: Destroying... [<span class="hljs-built_in">id</span>=i-j6cfxch3hp19qbdi10dc]<br>alicloud_instance.instance[1]: Still destroying... [<span class="hljs-built_in">id</span>=i-j6cfxch3hp19qbdi10dc, 10s elapsed]<br>alicloud_instance.instance[1]: Destruction complete after 12s<br>alicloud_slb_server_group.default: Modifying... [<span class="hljs-built_in">id</span>=rsp-j6ctarh6aaavt]<br><br>Error: [ERROR] terraform-provider-alicloud/alicloud/resource_alicloud_slb_server_group.go:209: Resource rsp-j6ctarh6aaavt RemoveVServerGroupBackendServers Failed!!! [SDK alibaba-cloud-sdk-go ERROR]:<br>SDK.ServerError<br>ErrorCode: ObtainIpFail<br>Recommend: https://next.api.aliyun.com/troubleshoot?q=ObtainIpFail&amp;product=Slb<br>RequestId: 97B9EA25-xxxx-xxxx-xxxx-0ABE26C845B4<br>Message: The specified BackendServers is invalid; some of the specified backend servers <span class="hljs-keyword">do</span> not exist or are not running.<br><br>  on main.tf line 70, <span class="hljs-keyword">in</span> resource <span class="hljs-string">&quot;alicloud_slb_server_group&quot;</span> <span class="hljs-string">&quot;default&quot;</span>:<br>  70: resource <span class="hljs-string">&quot;alicloud_slb_server_group&quot;</span> <span class="hljs-string">&quot;default&quot;</span> &#123;<br></code></pre></td></tr></table></figure>
+              <h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>使用CloudIaC平台部署环境时，plan即失败</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Terraform Plan<br>0秒<br><span class="hljs-built_in">stat</span> v0.7.0.tfvars: no such file or directory<br></code></pre></td></tr></table></figure>
 
-<p>第二次执行就成功。</p>
-<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>从日志中可以看到，先做了instance [id&#x3D;10.9.0.110] 的释放，再去更新slb_server_group资源时报了错。从控制台操作逻辑来说，应该是先将需要释放的instance从slb服务器组中删除，再进行销毁。应该是这个处理逻辑错乱出的错。给阿里云提工单！！</p>
-<h3 id="解决结果"><a href="#解决结果" class="headerlink" title="解决结果"></a>解决结果</h3><p>2个月后的今天，阿里云终于给出了已修复的答复，试了下还是老问题，询问后得知需要增加一个资源配置，修改代码如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">resource <span class="hljs-string">&quot;alicloud_slb_server_group&quot;</span> <span class="hljs-string">&quot;default&quot;</span> &#123;<br>  load_balancer_id = alicloud_slb_load_balancer.default.id<br>  name             = <span class="hljs-string">&quot;cloudiac_server_group&quot;</span><br>  <span class="hljs-comment"># 注释掉原代码</span><br>  <span class="hljs-comment"># servers &#123;</span><br>  <span class="hljs-comment">#   server_ids = alicloud_instance.cloudiac.*.id</span><br>  <span class="hljs-comment">#   port       = &quot;80&quot;</span><br>  <span class="hljs-comment">#   weight     = 50</span><br>  <span class="hljs-comment"># &#125;</span><br>&#125;<br><br>resource <span class="hljs-string">&quot;alicloud_slb_server_group_server_attachment&quot;</span> <span class="hljs-string">&quot;ssga&quot;</span> &#123;<br>  count = var.instance_number<br>  server_group_id = alicloud_slb_server_group.default.id<br>  server_id = alicloud_instance.cloudiac[count.index].<span class="hljs-built_in">id</span><br>  port = <span class="hljs-string">&quot;80&quot;</span><br>  weight = 50<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>缩容执行结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">ansible_host.cloudiac_website[1]: Destroying... [<span class="hljs-built_in">id</span>=10.9.0.111]<br>ansible_host.cloudiac_website[1]: Destruction complete after 0s<br>alicloud_slb_server_group_server_attachment.ssga[1]: Destroying... [<span class="hljs-built_in">id</span>=rsp-j6ctarh6aaavt:i-j6c5hdcgb6fim7vq3vxe:80]<br>alicloud_slb_listener.default: Modifying... [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:https:443]<br>alicloud_slb_server_group_server_attachment.ssga[1]: Destruction complete after 0s<br>alicloud_instance.instance[1]: Destroying... [<span class="hljs-built_in">id</span>=i-j6c5hdcgb6fim7vq3vxe]<br>alicloud_slb_listener.default: Modifications complete after 1s [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:https:443]<br>alicloud_slb_listener.http: Modifying... [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:http:80]<br>alicloud_slb_listener.http: Modifications complete after 1s [<span class="hljs-built_in">id</span>=lb-j6cmx0wqg117iobg0pq00:http:80]<br>alicloud_instance.instance[1]: Still destroying... [<span class="hljs-built_in">id</span>=i-j6c5hdcgb6fim7vq3vxe, 10s elapsed]<br>alicloud_instance.instance[1]: Destruction complete after 12s<br></code></pre></td></tr></table></figure>
-
-<p>可以看到，在instance销毁之前，先做了 alicloud_slb_server_group_server_attachment 资源的变更，至此问题修复。</p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>存在2点疑问</p>
+<ol>
+<li>通常是文件真的不存在才提示这个错误，但是CloudIaC平台中，tfvars文件是选择的，在部署界面检查也确实有这个文件可以选择；</li>
+<li>去vcs中检查云模板也有这个问题存在。</li>
+</ol>
+<h3 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h3><p>在vcs中检查时发现这个文件排序的位置很奇怪，没有和其他版本的tfvars在一起，而是独自排在最前面，检查文件名发现文件名前面有一个空格。<br>文件名中去除空格后，再次部署恢复正常。</p>
 
               
             </div>
@@ -307,8 +303,6 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/aliyun/">#aliyun</a>
-      
         <a href="/tags/terraform/">#terraform</a>
       
         <a href="/tags/CloudIaC/">#CloudIaC</a>
@@ -323,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.</div>
-      <div>http://brianchenl.github.io/2022/05/26/包含SLB的环境缩容时提示some-of-the-specified-backend-servers-do-not-exist-or-are-not-running/</div>
+      <div>terrafrom plan: stat v0.7.0.tfvars: no such file or directory</div>
+      <div>http://brianchenl.github.io/2022/06/02/terrafrom_plan_no_such_file_error/</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年5月26日</div>
+          <div>2022年6月2日</div>
         </div>
       
       
@@ -366,9 +360,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/" title="SLB监听开启健康检查导致页面502问题">
+                      <a href="/2022/06/07/slb-update-certificate-failed/" title="绑定证书的SLB更新证书失败">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SLB监听开启健康检查导致页面502问题</span>
+                        <span class="hidden-mobile">绑定证书的SLB更新证书失败</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -376,8 +370,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/" title="brew安装Node.js报错处理1例">
-                        <span class="hidden-mobile">brew安装Node.js报错处理1例</span>
+                      <a href="/2022/05/27/slb_listener_error/" title="SLB监听开启健康检查导致页面502问题">
+                        <span class="hidden-mobile">SLB监听开启健康检查导致页面502问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

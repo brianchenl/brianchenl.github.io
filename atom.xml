@@ -6,7 +6,7 @@
   <link href="http://brianchenl.github.io/atom.xml" rel="self"/>
   
   <link href="http://brianchenl.github.io/"/>
-  <updated>2022-06-02T14:14:14.177Z</updated>
+  <updated>2022-06-07T07:54:45.080Z</updated>
   <id>http://brianchenl.github.io/</id>
   
   <author>
@@ -17,9 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>绑定证书的SLB更新证书失败</title>
+    <link href="http://brianchenl.github.io/2022/06/07/slb-update-certificate-failed/"/>
+    <id>http://brianchenl.github.io/2022/06/07/slb-update-certificate-failed/</id>
+    <published>2022-06-07T06:10:34.000Z</published>
+    <updated>2022-06-07T07:54:45.080Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题现场"><a href="#问题现场" class="headerlink" title="问题现场"></a>问题现场</h3><p>SLB绑定了证书，https的listener关联到SLB。</p><p>因证书更新，修改了tf脚本中证书名和路径，重新部署环境时提示错误。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">Error: [ERROR] terraform-provider-alicloud/alicloud/resource_alicloud_slb_server_certificate.go:231: Resource 1579132625323477_180dfb1cd51_707461038_-939682910 DeleteServerCertificate Failed!!! [SDK alibaba-cloud-sdk-go ERROR]:<br>SDK.ServerError<br>ErrorCode: CertificateAndPrivateKeyIsRefered<br>Recommend: https://next.api.aliyun.com/troubleshoot?q=CertificateAndPrivateKeyIsRefered&amp;product=Slb<br>RequestId: 14C08433-174D-59F1-AEEA-D2B995385F12<br>Message: The specified certificate is bound to listeners. You cannot delete it.<br></code></pre></td></tr></table></figure><h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>更新证书是一个forcenew操作，SLB会销毁重建，因为存在listener的引用，导致无法销毁。阿里云的客服答复需要手工销毁listener再更新，但这不符合terraform管理基础设施的原则。</p><h3 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h3><p>根据阿里云的答复整理下思路，因为我们的变更导致需要销毁原有SLB进行重建，如过我们根据新证书先建个新SLB，修改listener的引用，最后销毁老的SLB是否就可以。</p><p>所以修改tf脚本中证书名和路径以外，同时修改SLB的实例名，就会创建一个新的SLB实例触发后续流程，问题解决。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;问题现场&quot;&gt;&lt;a href=&quot;#问题现场&quot; class=&quot;headerlink&quot; title=&quot;问题现场&quot;&gt;&lt;/a&gt;问题现场&lt;/h3&gt;&lt;p&gt;SLB绑定了证书，https的listener关联到SLB。&lt;/p&gt;
+&lt;p&gt;因证书更新，修改了tf脚本中证书名和路径，重新部</summary>
+      
+    
+    
+    
+    <category term="聚沙成塔" scheme="http://brianchenl.github.io/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/"/>
+    
+    
+    <category term="aliyun" scheme="http://brianchenl.github.io/tags/aliyun/"/>
+    
+    <category term="terraform" scheme="http://brianchenl.github.io/tags/terraform/"/>
+    
+  </entry>
+  
+  <entry>
     <title>terrafrom plan: stat v0.7.0.tfvars: no such file or directory</title>
-    <link href="http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/"/>
-    <id>http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/</id>
+    <link href="http://brianchenl.github.io/2022/06/02/terrafrom_plan_no_such_file_error/"/>
+    <id>http://brianchenl.github.io/2022/06/02/terrafrom_plan_no_such_file_error/</id>
     <published>2022-06-02T14:03:00.000Z</published>
     <updated>2022-06-02T14:14:14.177Z</updated>
     
@@ -45,8 +72,8 @@
   
   <entry>
     <title>SLB监听开启健康检查导致页面502问题</title>
-    <link href="http://brianchenl.github.io/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/"/>
-    <id>http://brianchenl.github.io/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/</id>
+    <link href="http://brianchenl.github.io/2022/05/27/slb_listener_error/"/>
+    <id>http://brianchenl.github.io/2022/05/27/slb_listener_error/</id>
     <published>2022-05-27T03:01:07.000Z</published>
     <updated>2022-06-02T14:15:47.829Z</updated>
     
@@ -74,8 +101,8 @@
   
   <entry>
     <title>包含SLB的环境缩容时提示some of the specified backend servers do not exist or are not running.</title>
-    <link href="http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/"/>
-    <id>http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/</id>
+    <link href="http://brianchenl.github.io/2022/05/26/slb_shrink_error/"/>
+    <id>http://brianchenl.github.io/2022/05/26/slb_shrink_error/</id>
     <published>2022-05-26T12:21:50.000Z</published>
     <updated>2022-06-02T14:04:41.060Z</updated>
     
@@ -102,8 +129,8 @@
   
   <entry>
     <title>brew安装Node.js报错处理1例</title>
-    <link href="http://brianchenl.github.io/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/"/>
-    <id>http://brianchenl.github.io/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/</id>
+    <link href="http://brianchenl.github.io/2022/05/25/brew_node_js_error/"/>
+    <id>http://brianchenl.github.io/2022/05/25/brew_node_js_error/</id>
     <published>2022-05-25T14:33:55.000Z</published>
     <updated>2022-05-27T14:46:35.429Z</updated>
     
