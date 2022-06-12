@@ -6,7 +6,7 @@
   <link href="http://brianchenl.github.io/atom.xml" rel="self"/>
   
   <link href="http://brianchenl.github.io/"/>
-  <updated>2022-06-07T08:27:21.210Z</updated>
+  <updated>2022-06-12T10:27:18.545Z</updated>
   <id>http://brianchenl.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一个git push报错的处理</title>
+    <link href="http://brianchenl.github.io/2022/06/12/a-git-push-error/"/>
+    <id>http://brianchenl.github.io/2022/06/12/a-git-push-error/</id>
+    <published>2022-06-12T09:59:38.000Z</published>
+    <updated>2022-06-12T10:27:18.545Z</updated>
+    
+    <content type="html"><![CDATA[<p>两个仓库执行git push操作，一个成功，一个失败</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push --all origin                        <br>Enumerating objects: 2768, <span class="hljs-keyword">done</span>.<br>Counting objects: 100% (2768/2768), <span class="hljs-keyword">done</span>.<br>Delta compression using up to 8 threads<br>Compressing objects: 100% (957/957), <span class="hljs-keyword">done</span>.<br>Writing objects: 100% (2768/2768), 71.92 MiB | 197.97 MiB/s, <span class="hljs-keyword">done</span>.<br>Total 2768 (delta 1773), reused 2454 (delta 1604), pack-reused 0<br>error: RPC failed; HTTP 413 curl 22 The requested URL returned error: 413<br>send-pack: unexpected disconnect <span class="hljs-keyword">while</span> reading sideband packet<br>fatal: the remote end hung up unexpectedly<br>Everything up-to-date<br></code></pre></td></tr></table></figure><p>网上查了下，大概率是Nginx层有上传最大限制，查看nginx日志，果然有错误信息</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">2022/01/01 08:57:26 [error] 6<span class="hljs-comment">#6: *12 client intended to send too large body: 65444907 bytes, client: 100.100.100.100, server: git.example.com, request: &quot;POST /example/test_script.git/git-receive-pack HTTP/1.1&quot;, host: &quot;git.example.com&quot;</span><br></code></pre></td></tr></table></figure><p>按网上提供的方案，本地放开限制</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config http.postBuffer 524288000<br></code></pre></td></tr></table></figure><p>同时nginx http段增加配置后重启</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini">client_max_body_size 512m<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure><p>问题解决。</p><blockquote><p>参考文档：<a href="https://blog.csdn.net/AV_woaijava/article/details/123101904">https://blog.csdn.net/AV_woaijava/article/details/123101904</a></p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;两个仓库执行git push操作，一个成功，一个失败&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span cla</summary>
+      
+    
+    
+    
+    <category term="聚沙成塔" scheme="http://brianchenl.github.io/categories/%E8%81%9A%E6%B2%99%E6%88%90%E5%A1%94/"/>
+    
+    
+    <category term="git" scheme="http://brianchenl.github.io/tags/git/"/>
+    
+    <category term="nginx" scheme="http://brianchenl.github.io/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>GitHub的ssh配置</title>
@@ -98,6 +125,26 @@
   </entry>
   
   <entry>
+    <title></title>
+    <link href="http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/"/>
+    <id>http://brianchenl.github.io/2022/06/02/terrafrom-plan-stat-v0-7-0-tfvars-no-such-file-or-directory/</id>
+    <published>2022-06-01T16:00:00.000Z</published>
+    <updated>2022-06-02T14:14:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;                                                                                                                                         </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>SLB监听开启健康检查导致页面502问题</title>
     <link href="http://brianchenl.github.io/2022/05/27/slb_listener_error/"/>
     <id>http://brianchenl.github.io/2022/05/27/slb_listener_error/</id>
@@ -123,6 +170,26 @@
     <category term="健康检查" scheme="http://brianchenl.github.io/tags/%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/"/>
     
     <category term="rewrite" scheme="http://brianchenl.github.io/tags/rewrite/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://brianchenl.github.io/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/"/>
+    <id>http://brianchenl.github.io/2022/05/27/SLB%E7%9B%91%E5%90%AC%E5%BC%80%E5%90%AF%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2502%E9%97%AE%E9%A2%98/</id>
+    <published>2022-05-26T16:00:00.000Z</published>
+    <updated>2022-06-02T14:15:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;                                                                                                                                         </summary>
+      
+    
+    
+    
     
   </entry>
   
@@ -155,6 +222,26 @@
   </entry>
   
   <entry>
+    <title></title>
+    <link href="http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/"/>
+    <id>http://brianchenl.github.io/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/</id>
+    <published>2022-05-25T16:00:00.000Z</published>
+    <updated>2022-06-02T14:04:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;                                                                                                                                         </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>brew安装Node.js报错处理1例</title>
     <link href="http://brianchenl.github.io/2022/05/25/brew_node_js_error/"/>
     <id>http://brianchenl.github.io/2022/05/25/brew_node_js_error/</id>
@@ -177,6 +264,26 @@
     <category term="brew" scheme="http://brianchenl.github.io/tags/brew/"/>
     
     <category term="node.js" scheme="http://brianchenl.github.io/tags/node-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://brianchenl.github.io/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/"/>
+    <id>http://brianchenl.github.io/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/</id>
+    <published>2022-05-24T16:00:00.000Z</published>
+    <updated>2022-05-27T14:46:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<p></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;                                                                                                                                         </summary>
+      
+    
+    
+    
     
   </entry>
   

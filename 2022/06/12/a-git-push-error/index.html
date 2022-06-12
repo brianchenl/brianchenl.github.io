@@ -16,25 +16,25 @@
   <meta name="author" content="Brianchenl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="出错现场123456789Warning: Bottle missing, falling back to the default domain...&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;ghcr.io&#x2F;v2&#x2F;homebrew&#x2F;core&#x2F;node&#x2F;manifests&#x2F;17.6.0Already downloaded: &#x2F;Users&#x2F;brian&#x2F;Library&#x2F;Caches&#x2F;Home">
+    <meta name="description" content="两个仓库执行git push操作，一个成功，一个失败 1234567891011git push --all origin                        Enumerating objects: 2768, done.Counting objects: 100% (2768&#x2F;2768), done.Delta compression using up to 8 threadsCom">
 <meta property="og:type" content="article">
-<meta property="og:title" content="brew安装Node.js报错处理1例">
-<meta property="og:url" content="http://brianchenl.github.io/2022/05/25/brew_node_js_error/index.html">
+<meta property="og:title" content="一个git push报错的处理">
+<meta property="og:url" content="http://brianchenl.github.io/2022/06/12/a-git-push-error/index.html">
 <meta property="og:site_name" content="天天老豆">
-<meta property="og:description" content="出错现场123456789Warning: Bottle missing, falling back to the default domain...&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;ghcr.io&#x2F;v2&#x2F;homebrew&#x2F;core&#x2F;node&#x2F;manifests&#x2F;17.6.0Already downloaded: &#x2F;Users&#x2F;brian&#x2F;Library&#x2F;Caches&#x2F;Home">
+<meta property="og:description" content="两个仓库执行git push操作，一个成功，一个失败 1234567891011git push --all origin                        Enumerating objects: 2768, done.Counting objects: 100% (2768&#x2F;2768), done.Delta compression using up to 8 threadsCom">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-25T14:33:55.000Z">
-<meta property="article:modified_time" content="2022-05-27T14:46:35.429Z">
+<meta property="article:published_time" content="2022-06-12T09:59:38.000Z">
+<meta property="article:modified_time" content="2022-06-12T10:27:18.545Z">
 <meta property="article:author" content="Brianchenl">
-<meta property="article:tag" content="brew">
-<meta property="article:tag" content="node.js">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="nginx">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>brew安装Node.js报错处理1例 - 天天老豆</title>
+  <title>一个git push报错的处理 - 天天老豆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -186,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="brew安装Node.js报错处理1例"></span>
+            <span id="subtitle" data-typed-text="一个git push报错的处理"></span>
           
         </div>
 
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-25 22:33" pubdate>
-          2022年5月25日 晚上
+        <time datetime="2022-06-12 17:59" pubdate>
+          2022年6月12日 下午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          914 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          19 分钟
+          8 分钟
         
       </span>
     
@@ -258,18 +258,26 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">brew安装Node.js报错处理1例</h1>
+            <h1 style="display: none">一个git push报错的处理</h1>
             
             <div class="markdown-body">
               
-              <h3 id="出错现场"><a href="#出错现场" class="headerlink" title="出错现场"></a>出错现场</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">Warning: Bottle missing, falling back to the default domain...<br>==&gt; Downloading https://ghcr.io/v2/homebrew/core/node/manifests/17.6.0<br>Already downloaded: /Users/brian/Library/Caches/Homebrew/downloads/617e1fb7782c60f2570a27b882d8e7c819d3ebc0204bc67963c779e1515d8c16--node-17.6.0.bottle_manifest.json<br>==&gt; Downloading https://ghcr.io/v2/homebrew/core/node/blobs/sha256:01f84ba9e17af0eee4de4950edf3ac8be2a4ff1f13a627216fbd05c7632443cc<br>Already downloaded: /Users/brian/Library/Caches/Homebrew/downloads/f79056fa91d100f94bf22d89b097783b414372e31f7658eae4628a33dc70ecc2--node--17.6.0.arm64_monterey.bottle.tar.gz<br>==&gt; Installing dependencies for node: brotli, c-ares, icu4c, libnghttp2 and libuv<br>==&gt; Installing node dependency: brotli<br>fatal: not in a git directory<br>Error: Command failed with exit 128: git<br></code></pre></td></tr></table></figure>
+              <p>两个仓库执行git push操作，一个成功，一个失败</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push --all origin                        <br>Enumerating objects: 2768, <span class="hljs-keyword">done</span>.<br>Counting objects: 100% (2768/2768), <span class="hljs-keyword">done</span>.<br>Delta compression using up to 8 threads<br>Compressing objects: 100% (957/957), <span class="hljs-keyword">done</span>.<br>Writing objects: 100% (2768/2768), 71.92 MiB | 197.97 MiB/s, <span class="hljs-keyword">done</span>.<br>Total 2768 (delta 1773), reused 2454 (delta 1604), pack-reused 0<br>error: RPC failed; HTTP 413 curl 22 The requested URL returned error: 413<br>send-pack: unexpected disconnect <span class="hljs-keyword">while</span> reading sideband packet<br>fatal: the remote end hung up unexpectedly<br>Everything up-to-date<br></code></pre></td></tr></table></figure>
 
-<h3 id="执行检查代码"><a href="#执行检查代码" class="headerlink" title="执行检查代码"></a>执行检查代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">brew doctor <span class="hljs-comment"># 检查brew能否正常工作</span><br></code></pre></td></tr></table></figure>
+<p>网上查了下，大概率是Nginx层有上传最大限制，查看nginx日志，果然有错误信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">2022/01/01 08:57:26 [error] 6<span class="hljs-comment">#6: *12 client intended to send too large body: 65444907 bytes, client: 100.100.100.100, server: git.example.com, request: &quot;POST /example/test_script.git/git-receive-pack HTTP/1.1&quot;, host: &quot;git.example.com&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p>显示结果</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash">Please note that these warnings are just used to <span class="hljs-built_in">help</span> the Homebrew maintainers<br>with debugging <span class="hljs-keyword">if</span> you file an issue. If everything you use Homebrew <span class="hljs-keyword">for</span> is<br>working fine: please don<span class="hljs-string">&#x27;t worry or file an issue; just ignore this. Thanks!</span><br><span class="hljs-string"></span><br><span class="hljs-string">Warning: Suspicious https://github.com/Homebrew/brew git origin remote found.</span><br><span class="hljs-string">The current git origin is:</span><br><span class="hljs-string">  https://mirrors.ustc.edu.cn/brew.git</span><br><span class="hljs-string"></span><br><span class="hljs-string">With a non-standard origin, Homebrew won&#x27;</span>t update properly.<br>You can solve this by setting the origin remote:<br>  git -C <span class="hljs-string">&quot;/opt/homebrew&quot;</span> remote set-url origin https://github.com/Homebrew/brew<br><br>Warning: Homebrew/homebrew-cask was not tapped properly! Run:<br>  <span class="hljs-built_in">rm</span> -rf <span class="hljs-string">&quot;/opt/homebrew/Library/Taps/homebrew/homebrew-cask&quot;</span><br>  brew tap homebrew/cask<br><br>Warning: Homebrew/homebrew-core was not tapped properly! Run:<br>  <span class="hljs-built_in">rm</span> -rf <span class="hljs-string">&quot;/opt/homebrew/Library/Taps/homebrew/homebrew-core&quot;</span><br>  brew tap homebrew/core<br><br>Warning: <span class="hljs-string">&quot;config&quot;</span> scripts exist outside your system or Homebrew directories.<br>`./configure` scripts often look <span class="hljs-keyword">for</span> *-config scripts to determine <span class="hljs-keyword">if</span><br>software packages are installed, and <span class="hljs-built_in">which</span> additional flags to use when<br>compiling and linking.<br><br>Having additional scripts <span class="hljs-keyword">in</span> your path can confuse software installed via<br>Homebrew <span class="hljs-keyword">if</span> the config script overrides a system or Homebrew-provided<br>script of the same name. We found the following <span class="hljs-string">&quot;config&quot;</span> scripts:<br>  /Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9-config<br>  /Library/Frameworks/Python.framework/Versions/3.9/bin/python3-config<br></code></pre></td></tr></table></figure>
+<p>按网上提供的方案，本地放开限制</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config http.postBuffer 524288000<br></code></pre></td></tr></table></figure>
 
-<h3 id="处理异常"><a href="#处理异常" class="headerlink" title="处理异常"></a>处理异常</h3><p>根据提示逐一执行命令即可</p>
+<p>同时nginx http段增加配置后重启</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini">client_max_body_size 512m<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p>问题解决。</p>
+<blockquote>
+<p>参考文档：<a target="_blank" rel="noopener" href="https://blog.csdn.net/AV_woaijava/article/details/123101904">https://blog.csdn.net/AV_woaijava/article/details/123101904</a></p>
+</blockquote>
 
               
             </div>
@@ -302,9 +310,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/brew/">#brew</a>
+        <a href="/tags/git/">#git</a>
       
-        <a href="/tags/node-js/">#node.js</a>
+        <a href="/tags/nginx/">#nginx</a>
       
     </div>
   
@@ -316,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>brew安装Node.js报错处理1例</div>
-      <div>http://brianchenl.github.io/2022/05/25/brew_node_js_error/</div>
+      <div>一个git push报错的处理</div>
+      <div>http://brianchenl.github.io/2022/06/12/a-git-push-error/</div>
     </div>
     <div class="license-meta">
       
@@ -329,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年5月25日</div>
+          <div>2022年6月12日</div>
         </div>
       
       
@@ -359,18 +367,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/26/%E5%8C%85%E5%90%ABSLB%E7%9A%84%E7%8E%AF%E5%A2%83%E7%BC%A9%E5%AE%B9%E6%97%B6%E6%8F%90%E7%A4%BAsome-of-the-specified-backend-servers-do-not-exist-or-are-not-running/" title="">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/25/brew%E5%AE%89%E8%A3%85Node-js%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%861%E4%BE%8B/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2022/06/07/github-ssh/" title="GitHub的ssh配置">
+                        <span class="hidden-mobile">GitHub的ssh配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
