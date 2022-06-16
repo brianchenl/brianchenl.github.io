@@ -6,7 +6,7 @@
   <link href="http://brianchenl.github.io/atom.xml" rel="self"/>
   
   <link href="http://brianchenl.github.io/"/>
-  <updated>2022-06-12T10:27:18.545Z</updated>
+  <updated>2022-06-16T14:14:26.018Z</updated>
   <id>http://brianchenl.github.io/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一次写 provider 遇到的问题</title>
+    <link href="http://brianchenl.github.io/2022/06/16/try-to-write-provider/"/>
+    <id>http://brianchenl.github.io/2022/06/16/try-to-write-provider/</id>
+    <published>2022-06-16T13:58:43.000Z</published>
+    <updated>2022-06-16T14:14:26.018Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>准确滴说，这次是改 provider 不是写，架子是<a href="https://github.com/xuxiaoahang2018">晓航同学</a>搭好的，请原谅一个还不够浪（golang）的我做成这样。但我还是会把问题如实记录下来，老鸟就不用看了，帮新人填个坑吧。</p></blockquote><h3 id="main-tf中指定了-registry-cloudiac-org-x2F-brian-x2F-briantest-terraform-init-会-Finding-latest-version-of-hashicorp-x2F-brian…"><a href="#main-tf中指定了-registry-cloudiac-org-x2F-brian-x2F-briantest-terraform-init-会-Finding-latest-version-of-hashicorp-x2F-brian…" class="headerlink" title="main.tf中指定了 registry.cloudiac.org&#x2F;brian&#x2F;briantest terraform init 会 Finding latest version of hashicorp&#x2F;brian…"></a>main.tf中指定了 registry.cloudiac.org&#x2F;brian&#x2F;briantest terraform init 会 Finding latest version of hashicorp&#x2F;brian…</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">resource <span class="hljs-string">&quot;brian_demo&quot;</span> <span class="hljs-string">&quot;test&quot;</span> &#123;<br>  instance_name = <span class="hljs-string">&quot;brianTest&quot;</span><br>  disk_size     = <span class="hljs-string">&quot;108&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure><p>资源名未修改，默认会去hashicorp官网找对应的provider。今天卓凡同学遇到类似的问题，他是 provider 名称多写了个h，结果在指定的 <a href="https://registry.cloudiac.org/">registry.cloudiac.org</a> 没找到，而根据 main.tf 中指定的资源又去 hashicorp 官网找，当然也找不到。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">Initializing provider plugins...<br>- Finding registry.cloudiac.org/idcos/qfushion versions matching <span class="hljs-string">&quot;1.0.0&quot;</span>...<br>- Finding latest version of hashicorp/qfusion...<br>- Using registry.cloudiac.org/idcos/qfushion v1.0.0 from the shared cache directory<br></code></pre></td></tr></table></figure><h3 id="Error-Failed-to-load-plugin-schemas"><a href="#Error-Failed-to-load-plugin-schemas" class="headerlink" title="Error: Failed to load plugin schemas"></a><strong>Error: Failed to load plugin schemas</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ terraform apply<br>╷<br>│ Error: Failed to load plugin schemas<br>│ <br>│ Error <span class="hljs-keyword">while</span> loading schemas <span class="hljs-keyword">for</span> plugin components: Failed to obtain provider schema: Could not load the schema <span class="hljs-keyword">for</span> provider<br>│ registry.cloudiac.org/brian/briantest: failed to instantiate provider <span class="hljs-string">&quot;registry.cloudiac.org/brian/briantest&quot;</span> to obtain schema: fork/exec<br>│ .terraform/providers/registry.cloudiac.org/brian/briantest/0.1.1/darwin_arm64/terraform-provider-briantest_0.1.1: permission denied..<br></code></pre></td></tr></table></figure><p>provider没有执行权限，赋权即可</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> a+x .terraform/providers/registry.cloudiac.org/brian/briantest/0.1.1/darwin_arm64/terraform-provider-briantest_0.1.1 <br></code></pre></td></tr></table></figure><h3 id="go-build的文件不是可执行文件"><a href="#go-build的文件不是可执行文件" class="headerlink" title="go build的文件不是可执行文件"></a>go build的文件不是可执行文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ file terraform-provider-briantest<br>terraform-provider-briantest: current ar archive<br></code></pre></td></tr></table></figure><p>目录下没有 main() 函数，所以编译生成了 archive 文件</p><p>切换到root目录下编译</p><h3 id="编译时提示错误"><a href="#编译时提示错误" class="headerlink" title="编译时提示错误"></a>编译时提示错误</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ go build -o terraform-provider-briantest        <br>main.go:5:2: cannot find package <span class="hljs-string">&quot;.&quot;</span> <span class="hljs-keyword">in</span>:<br>……/terraform-provider-briantest/vendor/terraform-provider-briantest/demo<br></code></pre></td></tr></table></figure><p>查看go.mod，module还是原来的 terraform-provider-yunjidemo</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">module terraform-provider-yunjidemo<br><br><span class="hljs-keyword">go</span> <span class="hljs-number">1.16</span><br><br>require github.com/hashicorp/terraform-plugin-sdk v1<span class="hljs-number">.17</span><span class="hljs-number">.2</span><br></code></pre></td></tr></table></figure><p>删除一些文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">rm</span> -rf go.mod go.sum vendor<br></code></pre></td></tr></table></figure><p>重新执行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ go mod init terraform-provider-briantest<br>go: creating new go.mod: module terraform-provider-briantest<br>go: to add module requirements and sums:<br>go mod tidy<br>$ go mod tidy<br>……<br>$ go mod vendor<br></code></pre></td></tr></table></figure><p>完成后再编译即通过</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;准确滴说，这次是改 provider 不是写，架子是&lt;a href=&quot;https://github.com/xuxiaoahang2018&quot;&gt;晓航同学&lt;/a&gt;搭好的，请原谅一个还不够浪（golang）的我做成这样。但我还是会把问题如实记录下来，老鸟</summary>
+      
+    
+    
+    
+    
+    <category term="terraform" scheme="http://brianchenl.github.io/tags/terraform/"/>
+    
+    <category term="provider" scheme="http://brianchenl.github.io/tags/provider/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3个Nginx的例子</title>
+    <link href="http://brianchenl.github.io/2022/06/12/3-examples-of-nginx/"/>
+    <id>http://brianchenl.github.io/2022/06/12/3-examples-of-nginx/</id>
+    <published>2022-06-12T12:07:20.000Z</published>
+    <updated>2022-06-12T12:31:36.823Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-反向代理指向动态域名"><a href="#1-反向代理指向动态域名" class="headerlink" title="1. 反向代理指向动态域名"></a>1. 反向代理指向动态域名</h3><p>反向代理指向一个动态域名，域名指向的IP每隔一个周期就会变更，反向代理即会失效。</p><p>需要在nginx.conf中http段增加以下配置：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">resolver</span> <span class="hljs-number">127.0.0.11</span> valid=<span class="hljs-number">300s</span>;<br></code></pre></td></tr></table></figure><p>其中127.0.0.11是nginx服务器的DNS服务地址，可以通过以下命令查看：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/resolv.conf<br></code></pre></td></tr></table></figure><p>例子中的 <strong>127.0.0.11</strong> 为docker镜像中常见DNS。</p><h3 id="2-静态文件加速"><a href="#2-静态文件加速" class="headerlink" title="2. 静态文件加速"></a>2. 静态文件加速</h3><p>新建网站首页打开时非常慢，抓包看到有个JS文件体积1.5Mb，下载需要12.x秒。网管建议打开nginx gzip配置。</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">gzip</span>  <span class="hljs-literal">on</span>;<br><span class="hljs-attribute">gzip_min_length</span> <span class="hljs-number">1k</span>;<br><span class="hljs-attribute">gzip_comp_level</span> <span class="hljs-number">4</span>;<br><span class="hljs-attribute">gzip_types</span> text/plain application/javascript application/x-javascript text/javascript text/xml text/css;<br><span class="hljs-attribute">gzip_disable</span> <span class="hljs-string">&quot;MSIE [1-6]\.&quot;</span>;<br><span class="hljs-attribute">gzip_vary</span> <span class="hljs-literal">on</span>;<br></code></pre></td></tr></table></figure><blockquote><p>参考文档：</p><p><a href="https://blog.csdn.net/wang_jing_jing/article/details/124250224">Nginx 性能优化 Gzip 压缩配置</a></p><p><a href="https://blog.csdn.net/m0_68850571/article/details/124027158">Nginx配置性能优化（最详细总结）</a></p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;1-反向代理指向动态域名&quot;&gt;&lt;a href=&quot;#1-反向代理指向动态域名&quot; class=&quot;headerlink&quot; title=&quot;1. 反向代理指向动态域名&quot;&gt;&lt;/a&gt;1. 反向代理指向动态域名&lt;/h3&gt;&lt;p&gt;反向代理指向一个动态域名，域名指向的IP每隔一个周期就会</summary>
+      
+    
+    
+    
+    
+    <category term="nginx" scheme="http://brianchenl.github.io/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>一个git push报错的处理</title>
