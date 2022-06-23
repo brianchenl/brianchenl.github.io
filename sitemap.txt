@@ -30,8 +30,8 @@ http://brianchenl.github.io/tags/%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/
 http://brianchenl.github.io/tags/rewrite/
 http://brianchenl.github.io/tags/GitHub/
 http://brianchenl.github.io/tags/ssh/
-http://brianchenl.github.io/tags/git/
 http://brianchenl.github.io/tags/nginx/
+http://brianchenl.github.io/tags/git/
 http://brianchenl.github.io/tags/provider/
 http://brianchenl.github.io/tags/zsh/
 http://brianchenl.github.io/tags/agnoster/
